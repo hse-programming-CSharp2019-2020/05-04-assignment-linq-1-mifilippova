@@ -61,17 +61,19 @@ namespace Task02
                     Console.WriteLine("OverflowException");
                 }
 
-                var filteredCollection = arr.Where(a => Array.IndexOf(arr, 0) > Array.IndexOf(arr, a));
+                // Выюираем элементы до 0, если 0 есть.
+                var filteredCollection = arr.Where(a => Array.IndexOf(arr, 0) > Array.IndexOf(arr, a) || Array.IndexOf(arr, 0) == -1);
 
                 try
                 {
 
                     // использовать статическую форму вызова метода подсчета среднего
                     double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
+
                     // использовать объектную форму вызова метода подсчета среднего
                     double averageUsingInstanceForm = filteredCollection.Average(a => a * a);
 
-
+                    // Выводим среднее значение
                     Console.WriteLine(string.Format("{0:F3}", averageUsingStaticForm).Replace('.',','));
                     Console.WriteLine(string.Format("{0:F3}", averageUsingInstanceForm).Replace('.', ','));
 
