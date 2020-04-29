@@ -46,7 +46,7 @@ namespace Task01
                 int[] arr = null;
                 try
                 {
-                    // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
+                    // Считывание массива, состоящего из целых чисел
                     arr = Array.ConvertAll((Console.ReadLine().Split(new[] { ' ' },
                         StringSplitOptions.RemoveEmptyEntries)), x => int.Parse(x));
                 }
@@ -58,16 +58,21 @@ namespace Task01
                 {
                     Console.WriteLine("FormatException");
                 }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("OverflowException");
+                }
 
-                // использовать синтаксис запросов!
+                // Использован синтаксис запросов
                 IEnumerable<int> arrQuery = from a in arr where a < 0 || a % 2 == 0 select a;
 
 
-                // использовать синтаксис методов!
+                // Использован синтаксис методов
                 IEnumerable<int> arrMethod = arr.Where(a => a < 0 || a % 2 == 0);
 
                 try
                 {
+                    // Вывод результатов
                     PrintEnumerableCollection<int>(arrQuery, ":");
                     PrintEnumerableCollection<int>(arrMethod, "*");
                 }
