@@ -41,41 +41,48 @@ namespace Task01
 
         public static void RunTesk01()
         {
-            int[] arr = null;
             try
             {
-                // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = Array.ConvertAll((Console.ReadLine().Split(new[] { ' ' },
-                    StringSplitOptions.RemoveEmptyEntries)), x => int.Parse(x));
-            }
-            catch (ArgumentNullException)
-            {
-                Console.WriteLine("ArgumentNullException");
-            }
-            catch (FormatException)
-            {
-                Console.WriteLine("FormatException");
-            }
+                int[] arr = null;
+                try
+                {
+                    // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
+                    arr = Array.ConvertAll((Console.ReadLine().Split(new[] { ' ' },
+                        StringSplitOptions.RemoveEmptyEntries)), x => int.Parse(x));
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("FormatException");
+                }
 
-            // использовать синтаксис запросов!
-            IEnumerable<int> arrQuery = from a in arr where a < 0 || a % 2 == 0 select a;
+                // использовать синтаксис запросов!
+                IEnumerable<int> arrQuery = from a in arr where a < 0 || a % 2 == 0 select a;
 
 
-            // использовать синтаксис методов!
-            IEnumerable<int> arrMethod = arr.Where( a => a < 0 || a % 2 == 0);
+                // использовать синтаксис методов!
+                IEnumerable<int> arrMethod = arr.Where(a => a < 0 || a % 2 == 0);
 
-            try
-            {
-                PrintEnumerableCollection<int>(arrQuery, ":");
-                PrintEnumerableCollection<int>(arrMethod, "*");
+                try
+                {
+                    PrintEnumerableCollection<int>(arrQuery, ":");
+                    PrintEnumerableCollection<int>(arrMethod, "*");
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine("InvalidOperationException");
+                }
             }
-            catch (ArgumentNullException)
+            catch (Exception)
             {
-                Console.WriteLine("ArgumentNullException");
-            }
-            catch (InvalidOperationException)
-            {
-                Console.WriteLine("InvalidOperationException");
+                Console.WriteLine("Exception");
             }
         }
 
