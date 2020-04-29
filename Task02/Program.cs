@@ -76,7 +76,8 @@ namespace Task02
                     Console.WriteLine(string.Format("{0:F3}", averageUsingInstanceForm).Replace('.', ','));
 
                     // вывести элементы коллекции в одну строку
-                    filteredCollection.ToList().ForEach(x => Console.Write(x + " "));
+                    Console.WriteLine(filteredCollection.Select(el => el.ToString())
+                         .Aggregate((a, b) => a.ToString() + " " + b.ToString()));
                 }
                 catch (ArgumentNullException)
                 {
