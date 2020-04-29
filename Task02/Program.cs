@@ -72,8 +72,8 @@ namespace Task02
                     double averageUsingInstanceForm = filteredCollection.Average(a => a * a);
 
 
-                    Console.WriteLine("{0:F3}".Replace('.', ','), averageUsingStaticForm);
-                    Console.WriteLine("{0:F3}".Replace('.', ','), averageUsingInstanceForm);
+                    Console.WriteLine(string.Format("{0:F3}", averageUsingStaticForm).Replace('.',','));
+                    Console.WriteLine(string.Format("{0:F3}", averageUsingInstanceForm).Replace('.', ','));
 
                     // вывести элементы коллекции в одну строку
                     filteredCollection.ToList().ForEach(x => Console.Write(x + " "));
