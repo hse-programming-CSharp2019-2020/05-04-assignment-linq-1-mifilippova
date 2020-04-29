@@ -52,46 +52,121 @@ namespace Task03
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
-            int N
-            List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
             try
             {
-                N = 
-                
-                for (int i = 0; i < N; i++)
+                int N;
+                List<ComputerInfo> computerInfoList = new List<ComputerInfo>();
+                try
                 {
-                    
+                    N = int.Parse(Console.ReadLine());
+
+                    for (int i = 0; i < N; i++)
+                    {
+                        var data = Console.ReadLine().Split(new[] { ' ' },
+                            StringSplitOptions.RemoveEmptyEntries);
+                        computerInfoList.Add(new ComputerInfo(data[0], int.Parse(data[1]),
+                            (Manufacturer)(int.Parse(data[2]))));
+                    }
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
+                }
+                catch (ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine("ArgumentOutOfRangeException");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("FormatException");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("OverflowExcepion");
+                }
+                catch (IndexOutOfRangeException)
+                {
+                    Console.WriteLine("IndexOutOfRangeException");
+                }
+
+                try
+                {
+                    // выполните сортировку одним выражением
+                    var computerInfoQuery = from c in computerInfoList
+                                            orderby c.Year descending
+                                            orderby c.ComputerManufacturer.ToString() ascending
+                                            orderby c.Owner descending
+                                            select c;
+
+
+                    PrintCollectionInOneLine(computerInfoQuery);
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
+                }
+                Console.WriteLine();
+
+                try
+                {
+                    // выполните сортировку одним выражением
+                    var computerInfoMethods = computerInfoList.OrderByDescending(x => x.Year)
+                        .OrderBy(x => x.ComputerManufacturer.ToString()).
+                        OrderByDescending(x => x.Owner);
+
+                    PrintCollectionInOneLine(computerInfoMethods);
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
                 }
             }
-           
-
-            // выполните сортировку одним выражением
-            var computerInfoQuery = from 
-
-            PrintCollectionInOneLine(computerInfoQuery);
-
-            Console.WriteLine();
-
-            // выполните сортировку одним выражением
-            var computerInfoMethods = computerInfoList.
-
-            PrintCollectionInOneLine(computerInfoMethods);
-            
+            catch (Exception)
+            {
+                Console.WriteLine("Exception");
+            }
         }
 
         // выведите элементы коллекции на экран с помощью кода, состоящего из одной линии (должна быть одна точка с запятой)
         public static void PrintCollectionInOneLine(IEnumerable<ComputerInfo> collection)
         {
+            Console.WriteLine(collection.Select(el => el.ToString())
+                         .Aggregate((a, b) => a.ToString() + "\n" + b.ToString()));
         }
     }
 
 
     class ComputerInfo
     {
+        public ComputerInfo(string owner, int year, Manufacturer computerManufacturer)
+        {
+            if (year < 1970 || year > 2020)
+                throw new ArgumentOutOfRangeException();
+            if (computerManufacturer < Manufacturer.Dell || computerManufacturer > Manufacturer.Microsoft)
+                throw new ArgumentOutOfRangeException();
+
+            Year = year;
+            Owner = owner;
+            ComputerManufacturer = computerManufacturer;
+        }
+
+        public int Year { get; set; }
         public string Owner { get; set; }
         public Manufacturer ComputerManufacturer { get; set; }
-        
+
+        public override string ToString()
+        {
+            return string.Format("{0}: {1} [{2}]", Owner, ComputerManufacturer, Year);
+        }
+
+    }
+    enum Manufacturer
+    {
+        Dell = 0,
+        Asus = 1,
+        Apple = 2,
+        Microsoft = 3
     }
 }
