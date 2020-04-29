@@ -84,7 +84,7 @@ namespace Task03
                 }
                 catch (OverflowException)
                 {
-                    Console.WriteLine("OverflowExcepion");
+                    Console.WriteLine("OverflowException");
                 }
                 catch (IndexOutOfRangeException)
                 {
