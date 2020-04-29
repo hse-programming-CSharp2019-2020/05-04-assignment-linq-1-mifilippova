@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Linq;
 
 /* В задаче не использовать циклы for, while. Все действия по обработке данных выполнять с использованием LINQ
@@ -38,29 +39,62 @@ namespace Task02
 
         public static void RunTesk02()
         {
-            int[] arr;
             try
             {
-                // Попробуйте осуществить считывание целочисленного массива, записав это ОДНИМ ВЫРАЖЕНИЕМ.
-                arr = 
+                int[] arr = null;
+                try
+                {
+                    // Считывание целочисленного массива
+                    arr = Array.ConvertAll(Console.ReadLine().Split(new[] { ' ' },
+                        StringSplitOptions.RemoveEmptyEntries), x => int.Parse(x));
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullException");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("FormatException");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("OverflowException");
+                }
+
+                var filteredCollection = arr.Where(a => Array.IndexOf(arr, 0) > Array.IndexOf(arr, a));
+
+                try
+                {
+
+                    // использовать статическую форму вызова метода подсчета среднего
+                    double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
+                    // использовать объектную форму вызова метода подсчета среднего
+                    double averageUsingInstanceForm = filteredCollection.Average(a => a * a);
+
+
+                    Console.WriteLine(averageUsingStaticForm);
+                    Console.WriteLine(averageUsingInstanceForm);
+
+                    // вывести элементы коллекции в одну строку
+                    filteredCollection.ToList().ForEach(x => Console.Write(x + " "));
+                }
+                catch (ArgumentNullException)
+                {
+                    Console.WriteLine("ArgumentNullExcpetion");
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine("InvalidOperationException");
+                }
+                catch (OverflowException)
+                {
+                    Console.WriteLine("Overflowexception");
+                }
             }
-            
-            
-            var filteredCollection = arr.
-           
-            try
+            catch (Exception)
             {
-                
-                // использовать статическую форму вызова метода подсчета среднего
-                double averageUsingStaticForm = 
-                // использовать объектную форму вызова метода подсчета среднего
-                double averageUsingInstanceForm = 
-
-
-                // вывести элементы коллекции в одну строку
-                filteredCollection.
+                Console.WriteLine("Exception");
             }
-          
         }
         
     }
