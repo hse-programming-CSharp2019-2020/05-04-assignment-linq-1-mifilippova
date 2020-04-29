@@ -74,9 +74,9 @@ namespace Task03
                 {
                     Console.WriteLine("ArgumentNullException");
                 }
-                catch (ArgumentOutOfRangeException)
+                catch (ArgumentException)
                 {
-                    Console.WriteLine("ArgumentOutOfRangeException");
+                    Console.WriteLine("ArgumentException");
                 }
                 catch (FormatException)
                 {
@@ -125,7 +125,7 @@ namespace Task03
             }
             catch (Exception)
             {
-                Console.WriteLine("Exception");
+                //Console.WriteLine("Exception");
             }
         }
 
