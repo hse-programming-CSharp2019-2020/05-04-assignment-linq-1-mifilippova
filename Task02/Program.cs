@@ -72,8 +72,8 @@ namespace Task02
                     double averageUsingInstanceForm = filteredCollection.Average(a => a * a);
 
 
-                    Console.WriteLine(averageUsingStaticForm);
-                    Console.WriteLine(averageUsingInstanceForm);
+                    Console.WriteLine("{0:F3}".Replace('.', ','), averageUsingStaticForm);
+                    Console.WriteLine("{0:F3}".Replace('.', ','), averageUsingInstanceForm);
 
                     // вывести элементы коллекции в одну строку
                     filteredCollection.ToList().ForEach(x => Console.Write(x + " "));
@@ -82,13 +82,13 @@ namespace Task02
                 {
                     Console.WriteLine("ArgumentNullExcpetion");
                 }
-                catch (InvalidOperationException)
-                {
-                    Console.WriteLine("InvalidOperationException");
-                }
                 catch (OverflowException)
                 {
                     Console.WriteLine("Overflowexception");
+                }
+                catch (InvalidOperationException)
+                {
+                    Console.WriteLine("InvalidOperationException");
                 }
             }
             catch (Exception)
