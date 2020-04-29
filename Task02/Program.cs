@@ -87,7 +87,7 @@ namespace Task02
                 }
                 catch (OverflowException)
                 {
-                    Console.WriteLine("Overflowexception");
+                    Console.WriteLine("OverflowException");
                 }
                 catch (InvalidOperationException)
                 {
