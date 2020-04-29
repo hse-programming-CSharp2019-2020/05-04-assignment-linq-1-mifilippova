@@ -68,10 +68,10 @@ namespace Task02
                 {
 
                     // использовать статическую форму вызова метода подсчета среднего
-                    double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => x * x);
+                    double averageUsingStaticForm = Enumerable.Average(filteredCollection, x => checked(x * x));
 
                     // использовать объектную форму вызова метода подсчета среднего
-                    double averageUsingInstanceForm = filteredCollection.Average(a => a * a);
+                    double averageUsingInstanceForm = filteredCollection.Average(a => checked(a * a));
 
                     // Выводим среднее значение
                     Console.WriteLine(string.Format("{0:F3}", averageUsingStaticForm).Replace('.',','));
